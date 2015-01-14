@@ -1,0 +1,32 @@
+<script>
+  function Plant(name, nutrients, sunlight, water, ripeTime) {
+    this.name = name;
+    this.nutrients = nutrients;
+    this.sunlight = sunlight;
+    this.water = water;
+    this.ripeTime = ripeTime;
+  }  
+
+  Plant.prototype.dead = false;
+
+  function Garden() {
+    this.garden = [];
+  }
+
+  Garden.prototype.addPlant = function(name, nutrients, sunlight, water, ripeTime) {
+    this.garden.push(new Plant(name, nutrients, sunlight, water, ripeTime));
+  }
+
+  var dailyValue = function() {
+    var dailyNutrients = Math.floor(Math.random() * (10 - 1)) + 1;
+    var dailySunlight = Math.floor(Math.random() * (10 - 1)) + 1;
+    var dailyWater = Math.floor(Math.random() * (10 - 1)) + 1;
+  }
+
+  Garden.prototype.growPlants = function() {
+    for(var day = 0; day <= 100; day++) {
+      dailyValue();
+    }
+  }
+
+</script>
