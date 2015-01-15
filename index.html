@@ -1,55 +1,41 @@
-<script>
-  var dailyNutrients, dailySunlight, dailyWater;
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
 
-  function Plant(name, nutrients, sunlight, water, ripeTime) {
-    this.name = name;
-    this.nutrients = nutrients;
-    this.sunlight = sunlight;
-    this.water = water;
-    this.ripeTime = ripeTime;
-    var growingDays = [];
-    this.growingDays = growingDays;
-    var dead = false
-    this.dead = dead;
-  }  
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="scripts.js"></script>
+  </head>
 
-// Create environment object to store dailyValues, and call environment
-  var dailyValue = function() {
-    dailyNutrients = Math.floor(Math.random() * (10 - 1)) + 1;
-    dailySunlight = Math.floor(Math.random() * (10 - 1)) + 1;
-    dailyWater = Math.floor(Math.random() * (10 - 1)) + 1;
-  }
+  <body>
+    <header>
+      <nav >
+        <ul>
+          <li><a href="index.html"><img src="" alt="logo"></a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="simulator.html">Simulator</a></li>
+        </ul>
+      </nav>
+    </header>
+       
+    <section>
+      <h1>The Casual Gardener.</h1>
+      <p>Cupcake ipsum dolor sit amet tiramisu lollipop I love candy. Sugar plum dessert croissant ice cream danish pastry powder. Icing cheesecake marshmallow.</p>
+      
+      <p>Cotton candy I love I love. Bonbon lemon drops chupa chups unerdwear.com donut. Marzipan soufflé sweet roll croissant. Sesame snaps soufflé cookie chocolate cake liquorice I love toffee jelly.</p>
 
-  function Garden() {
-    this.plants = [];
-  }
+      <a href="simulator.html"><button>Start!</button></a>
 
-  Garden.prototype.addPlant = function(name, nutrients, sunlight, water, ripeTime) {
-    this.plants.push(new Plant(name, nutrients, sunlight, water, ripeTime));    
-  }
+    </section>
 
-  Garden.prototype.growPlants = function() {
-    for(var day = 0; day < 10; day++) {
-      dailyValue();
-      for(var i = 0; i < this.plants.length; i++) {
-        if ((this.plants[i].nutrients >= dailyNutrients) && (this.plants[i].sunlight >= dailySunlight) && (this.plants[i].water >= dailyWater)) {
-          this.plants[i].growingDays.push(1);
-        }
-        else {
-          this.plants[i].growingDays.push(0);
-          if ((this.plants[i].growingDays[day-1]) + (this.plants[i].growingDays[day-2]) == 0) {
-            this.plants[i].dead = true;
-          }
-        };
-      };
-    };
-    console.log(this.plants);
-  };
+    <footer>
+      <span>The Casual Gardener, est. 2015</span><br />
+      <span>Proudly build by Adam Stelle and Keri Brady.</span>
 
-  var plants = new Garden();
-  plants.addPlant("Fern", 8, 8, 9, 20);
-  plants.addPlant("Rose", 8, 7, 5, 30);
-  plants.addPlant("Cabbage", 7, 6, 8, 40);
-  plants.growPlants();
+    </footer>
 
-</script>
+  </body>
+</html>
