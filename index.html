@@ -13,6 +13,7 @@
     this.dead = dead;
   }  
 
+// Create environment object to store dailyValues, and call environment
   var dailyValue = function() {
     dailyNutrients = Math.floor(Math.random() * (10 - 1)) + 1;
     dailySunlight = Math.floor(Math.random() * (10 - 1)) + 1;
@@ -20,38 +21,35 @@
   }
 
   function Garden() {
-    this.garden = [];
+    this.plants = [];
   }
 
   Garden.prototype.addPlant = function(name, nutrients, sunlight, water, ripeTime) {
-    this.garden.push(new Plant(name, nutrients, sunlight, water, ripeTime));    
+    this.plants.push(new Plant(name, nutrients, sunlight, water, ripeTime));    
   }
 
   Garden.prototype.growPlants = function() {
     for(var day = 0; day < 10; day++) {
       dailyValue();
-      for(var i = 0; i < this.garden.length; i++) {
-        if ((this.garden[i].nutrients >= dailyNutrients) && (this.garden[i].sunlight >= dailySunlight) && (this.garden[i].water >= dailyWater)) {
-          this.garden[i].growingDays.push(1);
+      for(var i = 0; i < this.plants.length; i++) {
+        if ((this.plants[i].nutrients >= dailyNutrients) && (this.plants[i].sunlight >= dailySunlight) && (this.plants[i].water >= dailyWater)) {
+          this.plants[i].growingDays.push(1);
         }
         else {
-          this.garden[i].growingDays.push(0);
-          if (this.garden[i].growingDays[day-1] == 0) {
-            if (this.garden[i].growingDays[day-2] == 0) {
-              this.garden[i].dead = true;
-            }
+          this.plants[i].growingDays.push(0);
+          if ((this.plants[i].growingDays[day-1]) + (this.plants[i].growingDays[day-2]) == 0) {
+            this.plants[i].dead = true;
           }
         };
       };
     };
-    console.log(this.garden);
+    console.log(this.plants);
   };
 
   var plants = new Garden();
   plants.addPlant("Fern", 8, 8, 9, 20);
   plants.addPlant("Rose", 8, 7, 5, 30);
-  plants.addPlant("Cabbage", 1, 4, 3, 40);
+  plants.addPlant("Cabbage", 7, 6, 8, 40);
   plants.growPlants();
-  
 
 </script>
