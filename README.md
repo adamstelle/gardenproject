@@ -1,5 +1,8 @@
 The Garden Project
 
-I want to create an abstracted model plants growing within a grden. Each plant needs a certain amount of nutrients from the soil, sunlight, and water to grow. Each plant has it's own growth life (how long it takes to grow), size (per sqft), and particular nutrient/sunlight/water daily needs. How long a plant will take to grow (or whether it will die) depends whether it can receive enough sunlight, water, and nutrients on a daily basis, which is also determined by how closely the plants are spaced in the garden and the plants size (all measured in SQFT).
+We created an abstracted model of plants growing within a garden. Each plant has it's own growth life (how long it takes to grow) and particular nutrient/sunlight/water daily needs. The model runs through a number of days (a growing season), and compares the plant's daily needs with the actual values of that day. If the plant's growing conditions are satisfied for that day, we increment it's 'Growing Days' by one, until it reaches it's required number of days to become ripe. 
+
+If, however, the plant does not meet the growing conditions for 3 consecutive days, the plant dies.
+
 
 ![Photo of Garden UML](GardenUML.JPG)
