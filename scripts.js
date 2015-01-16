@@ -10,6 +10,7 @@ var southwest = new Region("southwest", 2,6,  1,10, 1,5);
 var midwest   = new Region("midwest",   1,7,  2,8,  5,8);
 var southeast = new Region("southeast", 5,8,  2,8,  7,9);
 var northeast = new Region("northeast", 4,7,  1,7,  2,9);
+var plants = new Garden();
 
 function displayContent() {
   simulationDays.value;
@@ -112,14 +113,11 @@ Garden.prototype.growPlants = function(region) {
     };
   };
   printResult(this.plants);
-  console.log(region);
-  console.log(this.plants);
 };
 
 function printResult(plantResults) {
   var dead = [];
   var alive = [];
-  console.log(plants.length);
   for (var j = 0; j < plantResults.length; j++) {
     if (plantResults[j].dead == true) {
       dead.push(" " + plantResults[j].name + " ");
@@ -128,10 +126,8 @@ function printResult(plantResults) {
       alive.push(" " + plantResults[j].name + "");
     }
   }
-  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays + " days, this how your garden has grown.<br> The " + dead + " have all died. <br> But the " + alive + " have all survived and grown into beautiful plants!.";
+  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br> The " + dead + " have all died. <br> But the " + alive + " have all survived and grown into beautiful plants!.";
 }
-
-var plants = new Garden();
 
 buttonClick.addEventListener('click', displayContent, false);
 refresh.addEventListener('click', function() {
