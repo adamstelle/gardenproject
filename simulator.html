@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
 
-  <body>
+  <body class="background">
     <header class="header">
       <nav>
         <ul>
-          <li><a href="index.html"><img src="" alt="logo"></a></li>
+          <li><a href="index.html"><img src="images/icon.png" alt="logo"></a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="simulator.html">Simulator</a></li>
         </ul>
       </nav>
     </header>
 
-    <main class="background">   
+    <main>   
       <section class="body">
         <h1>Garden Simulator</h1>
 
@@ -35,7 +35,7 @@
           </form> 
         </select>
 
-        <h2>Please input 1 to 4 plants for your garden:</h2>
+        <h2>Please choose your plants:</h2>
         <form class="mainFont checkbox" id="plants">
           <input type="checkbox" value="zucchini">Zucchini<br/>
           <input type="checkbox" value="carrots">Carrots<br/>
@@ -43,11 +43,13 @@
           <input type="checkbox" value="apples">Apples<br/>
           <input type="checkbox" value="corn">Corn<br/>
         </form> 
+        <div id="noplants"></div>
 
         <h2>Select how many days you would like to simulate the growing of your plants (between 7 and 90 days):</h2>
         <form class="mainFont">
           <input type="number" id="simulationdays" name="days" min="7" max="90">
         </form>
+        <div id="nodays"></div>
         <button id="submit" type="reset">Submit</button>
         <input type=button value="Refresh" id="refresh">
 
