@@ -1,10 +1,20 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed|Old+Standard+TT);
+
+.background {
+  background-image: url(../images/beets2.jpg);
+  background-repeat: no-repeat;
+}
+
 .body {
-  background-image: url(../images/beets.jpg);
   height: 600px;
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 25px;
 }
 
 .header {
-  height: 75px;
+  height: 65px;
+  background-color: #237544;
 }
 
 li {
@@ -12,5 +22,40 @@ li {
 }
 
 .footer {
-  height: 50px;
+  text-align: center;
+  background-color: #225746;
+  color: #eef2ed;
+  font-family: 'Old Standard TT', serif;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+button {
+  background-color: transparent;
+  border-style: 2px solid;
+  border-color: #8f2541;
+  border-radius: 2px;
+  color: #8f2541;
+}
+
+h1 {
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+p, .mainFont {
+  font-family: 'Old Standard TT', serif;
+  font-size: 18px;
+  color: #eef2ed;
+  line-height: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+h2 {
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
