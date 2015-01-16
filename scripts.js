@@ -4,6 +4,7 @@ var dropdownRegions = document.getElementById("regions");
 var plantChoices = document.getElementById("plants");
 var simulationDays = document.getElementById("simulationdays");
 var plantTypes = plantChoices.elements;
+
 var northwest = new Region("northwest", 2,7,  1,5,  8,10);
 var west      = new Region("west",      2,6,  3,10, 4,7);
 var southwest = new Region("southwest", 2,6,  1,10, 1,5);
@@ -120,13 +121,13 @@ function printResult(plantResults) {
   var alive = [];
   for (var j = 0; j < plantResults.length; j++) {
     if (plantResults[j].dead == true) {
-      dead.push(" " + plantResults[j].name + " ");
+      dead.push(plantResults[j].name);
     }
     else {
-      alive.push(" " + plantResults[j].name + "");
+      alive.push(plantResults[j].name);
     }
   }
-  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br> The " + dead + " have all died. <br> But the " + alive + " have all survived and grown into beautiful plants!.";
+  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br> The " + dead + " have all died. <br> But the " + alive + " have all survived and grown into beautiful plants!";
 }
 
 buttonClick.addEventListener('click', displayContent, false);

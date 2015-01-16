@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
 
-  <body class="background">
+  <body>
     <header class="header">
       <nav>
         <ul>
@@ -18,44 +18,48 @@
         </ul>
       </nav>
     </header>
-       
-    <section class="body">
-      <h1>Garden Simulator</h1>
-      <h2>Please select your region:</h2>
-      <select name="regions" id="regions" class="mainFont">
-        <form>
-          <option value="northwest" id="northwest">Northwest</option><br />
-          <option value="west" id="west">West</option><br />
-          <option value="southwest" id="southwest">Southwest</option><br />
-          <option value="midwest" id="midwest">Midwest</option><br />
-          <option value="southeast" id="southeast">Southeast</option><br />
-          <option value="northeast" id="northeast">Northeast</option><br />
+
+    <main class="background">   
+      <section class="body">
+        <h1>Garden Simulator</h1>
+
+        <h2>Please select your region:</h2>
+        <select name="regions" id="regions" class="mainFont">
+          <form>
+            <option value="northwest" id="northwest">Northwest</option><br />
+            <option value="west" id="west">West</option><br />
+            <option value="southwest" id="southwest">Southwest</option><br />
+            <option value="midwest" id="midwest">Midwest</option><br />
+            <option value="southeast" id="southeast">Southeast</option><br />
+            <option value="northeast" id="northeast">Northeast</option><br />
+          </form> 
+        </select>
+
+        <h2>Please input 1 to 4 plants for your garden:</h2>
+        <form class="mainFont checkbox" id="plants">
+          <input type="checkbox" value="zucchini">Zucchini<br/>
+          <input type="checkbox" value="carrots">Carrots<br/>
+          <input type="checkbox" value="beets">Beets<br/>
+          <input type="checkbox" value="apples">Apples<br/>
+          <input type="checkbox" value="corn">Corn<br/>
         </form> 
-      </select>
 
+        <h2>Select how many days you would like to simulate the growing of your plants (between 7 and 90 days):</h2>
+        <form class="mainFont">
+          <input type="number" id="simulationdays" name="days" min="7" max="90">
+        </form>
+        <button id="submit" type="reset">Submit</button>
+        <input type=button value="Refresh" id="refresh">
 
-      <h2>Please input 1 to 4 plants for your garden:</h2>
-      <form class="mainFont" id="plants">
-        <input type="checkbox" value="zucchini">Zucchini
-        <input type="checkbox" value="carrots">Carrots
-        <input type="checkbox" value="beets">Beets
-        <input type="checkbox" value="apples">Apples
-        <input type="checkbox" value="corn">Corn
-      </form> 
-
-      <h2>Select how many days you would like to simulate the growing of your plants (between 7 and 90 days):</h2>
-      <form class="mainFont">
-        <input type="number" id="simulationdays" name="days" min="7" max="90">
-      </form>
-      <button id="submit" type="reset">Submit</button>
-      <input type=button value="Refresh" id="refresh">
-      
-      <section id="result" class="mainFont"></section>
-    </section>
+        <section id="result" class="mainFont">
+          
+        </section>
+      </section>
+    </main>
 
     <footer class="footer"> 
       <span>The Casual Gardener, est. 2015</span><br />
-      <span>Proudly build by Adam Stelle and Keri Brady.</span>
+      <span>Proudly built by Adam Stelle and Keri Brady</span>
       <script type="text/javascript" src="scripts.js"></script>
     </footer>
 
