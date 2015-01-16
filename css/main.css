@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed|Old+Standard+TT);
 
 .background {
-  background-image: url(../images/beets2.jpg);
+  background-image: url(../images/background.png);
   background-repeat: no-repeat;
 }
 
@@ -30,12 +30,16 @@ li {
   padding-bottom: 15px;
 }
 
-button {
-  background-color: transparent;
-  border-style: 2px solid;
-  border-color: #8f2541;
-  border-radius: 2px;
-  color: #8f2541;
+.actionbutton {
+  background-color: #8f2541;
+  border: 2px solid #eef2ed;;
+  border-radius: 25px;
+  color: #eef2ed;
+  cursor: pointer;
+  display: inline-block;
+  padding: 20px 50px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 16px;
 }
 
 h1 {
@@ -59,3 +63,9 @@ h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
+
+
+
+
+
+
