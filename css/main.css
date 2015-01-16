@@ -1,0 +1,16 @@
+.body {
+  background-image: url(../images/beets.jpg);
+  height: 600px;
+}
+
+.header {
+  height: 75px;
+}
+
+li {
+  display: inline;
+}
+
+.footer {
+  height: 50px;
+}
