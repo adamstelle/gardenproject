@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
-
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="scripts.js"></script>
   </head>
 
   <body>
@@ -25,7 +23,7 @@
       <h1>Garden Simulator.</h1>
       <h2>Please select your region:</h2>
       <form>
-        <select name="region" id="region">
+        <select name="regions" id="regions">
           <option value="northwest" id="northwest">Northwest</option>
           <option value="west" id="west">West</option>
           <option value="southwest" id="southwest">South West</option>
@@ -34,21 +32,27 @@
           <option value="northeast" id="northeast">North East</option>
         </select>
       </form> 
-      <h2>Please select 1 to 4 plants for your garden:</h2>
-      <form>
-        <select name="plants" id="plants">
-          <option value="fern" id="fern">Fern</option>
-
-        </select>
+      <h2>Please input 1 to 4 plants for your garden!</h2>
+      <form id="plants">
+        <input type="checkbox" value="zucchini">Zucchini
+        <input type="checkbox" value="carrots">Carrots
+        <input type="checkbox" value="beets">Beets
+        <input type="checkbox" value="apples">Apples
+        <input type="checkbox" value="corn">Corn
       </form> 
-
+      <h2>Please select how many days you would like to simulate the growing of your plants! (between a week and 3 months please)</h2>
+      <form>
+        <input type="number" id="simulationdays" name="days" min="7" max="90">
+      </form>
       <button id="submit" type="reset">Submit</button>
+      <input type=button value="Refresh" id="refresh">
     </section>
-
+    <section id="result">
+    </section>
     <footer>
       <span>The Casual Gardener, est. 2015</span><br />
       <span>Proudly build by Adam Stelle and Keri Brady.</span>
-
+      <script type="text/javascript" src="scripts.js"></script>
     </footer>
 
   </body>
