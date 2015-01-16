@@ -2,7 +2,7 @@
 
 .background {
   background-image: url(../images/background.png);
-  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .body {
@@ -13,8 +13,10 @@
 }
 
 .header {
-  height: 65px;
-  background-color: #237544;
+  height: 4em;
+  padding: .1em;
+  background-color: #fff;
+  opacity:.3;
 }
 
 li {
@@ -23,11 +25,17 @@ li {
 
 .footer {
   text-align: center;
-  background-color: #225746;
-  color: #eef2ed;
+  background-color: #fff;
+  opacity:.3;
+  color: #232b3d;
   font-family: 'Old Standard TT', serif;
-  padding-top: 10px;
-  padding-bottom: 15px;
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
 }
 
 .actionbutton {
