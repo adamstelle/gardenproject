@@ -1,59 +1,64 @@
 var dailyNutrients, dailySunlight, dailyWater;
-var buttonClick = document.getElementById("submit");
-var dropdownRegions = document.getElementById("regions");
-var plantChoices = document.getElementById("plants");
-var simulationDays = document.getElementById("simulationdays");
-var plantTypes = plantChoices.elements;
 
-var northwest = new Region("northwest", 2,7,  1,5,  8,10);
-var west      = new Region("west",      2,6,  3,10, 4,7);
-var southwest = new Region("southwest", 2,6,  1,10, 1,5);
-var midwest   = new Region("midwest",   1,7,  2,8,  5,8);
-var southeast = new Region("southeast", 5,8,  2,8,  7,9);
-var northeast = new Region("northeast", 4,7,  1,7,  2,9);
+var buttonClick = document.getElementById("submit"),
+    dropdownRegions = document.getElementById("regions"),
+    plantChoices = document.getElementById("plants"),
+    simulationDays = document.getElementById("simulationdays"),
+    plantsWarning = document.getElementById("noplants"),
+    daysWarning = document.getElementById("nodays"),
+    plantTypes = plantChoices.elements;
+
+var seattle   = new Region("seattle", 2,7,  1,5,  8,10),
+    sanfran   = new Region("sanfran", 2,6,  3,10, 4,7),
+    dallas    = new Region("dallas",  2,6,  1,10, 1,5),
+    chicago   = new Region("chicago", 1,7,  2,8,  5,8),
+    atlanta   = new Region("atlanta", 5,8,  2,8,  7,9),
+    boston    = new Region("boston",  4,7,  1,7,  2,9);
+
 var plants = new Garden();
+
 
 function displayContent() {
   simulationDays.value;
   dropdownRegions.value;  
   getPlants();
   switch(dropdownRegions.value){
-    case "northwest":
-      plants.growPlants(northwest);
+    case "seattle":
+      plants.growPlants(seattle);
       break;
-    case "west":
-      plants.growPlants(west);
+    case "sanfran":
+      plants.growPlants(sanfran);
       break;
-    case "southwest":
-      plants.growPlants(southwest);
+    case "dallas":
+      plants.growPlants(dallas);
       break;
-    case "midwest":
-      plants.growPlants(midwest);
+    case "chicago":
+      plants.growPlants(chicago);
       break;
-    case "southeast":
-      plants.growPlants(southeast);
+    case "atlanta":
+      plants.growPlants(atlanta);
       break;
-    case "northeast":
-      plants.growPlants(northeast);
+    case "boston":
+      plants.growPlants(boston);
   }
 }
 
 function getPlants() {
   for (var i = 0; i < plantTypes.length; i++) {
     if (plantTypes[i].checked == true) {
-      if (plantTypes[i].value=="zucchini") {
+      if (plantTypes[i].value == "zucchini") {
         plants.addPlant("zucchini", 9, 6, 9, 20);
       }
-      else if (plantTypes[i].value=="carrots") {
+      else if (plantTypes[i].value == "carrots") {
         plants.addPlant("carrots", 8, 7, 5, 30);
       }
-      else if (plantTypes[i].value=="beets") {
+      else if (plantTypes[i].value == "beets") {
         plants.addPlant("beets", 7, 6, 8, 40);
       }
-      else if (plantTypes[i].value=="apples") {
+      else if (plantTypes[i].value == "apples") {
         plants.addPlant("apples", 7, 6, 8, 40);
       }
-      else if (plantTypes[i].value=="corn") {
+      else if (plantTypes[i].value == "corn") {
         plants.addPlant("corn", 7, 6, 8, 40);
       }
     }
@@ -130,7 +135,22 @@ function printResult(plantResults) {
   document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br> The " + dead + " have all died. <br> But the " + alive + " have all survived and grown into beautiful plants!";
 }
 
-buttonClick.addEventListener('click', displayContent, false);
+//check to see if user submitted values
+function checkPlants(event) {
+  if (plantTypes.length == 0) {
+    plantsWarning.innerHTML = "Please select at least one plant.";
+    event.preventDefault();
+  } else if (simulationdays.value == 0) {
+    daysWarning.innerHTML = "Please enter a number of days."
+    event.preventDefault();
+  }
+  else {
+    displayContent();
+  }
+}
+
+
+buttonClick.addEventListener('click', checkPlants, false);
 refresh.addEventListener('click', function() {
  history.go();
 }, false);
