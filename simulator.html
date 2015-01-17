@@ -6,13 +6,14 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/states.css">
   </head>
 
   <body class="background">
     <header class="header">
       <nav>
         <ul>
-          <li><a href="index.html"><img src="images/icon.png" alt="logo"></a></li>
+          <li><a href="index.html"><img class="icon" src="images/smalllogo.png" alt="Home"></a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="simulator.html">Simulator</a></li>
         </ul>
@@ -24,7 +25,7 @@
         <h1>Garden Simulator</h1>
 
         <h2>Please select your region:</h2>
-        <select name="regions" id="regions" class="mainFont">
+        <select name="regions" id="regions" class="darkFont">
           <form>
             <option value="seattle">Seattle</option><br />
             <option value="sanfran">San Francisco</option><br />
@@ -36,26 +37,41 @@
         </select>
 
         <h2>Please choose your plants:</h2>
-        <form class="mainFont checkbox" id="plants">
+        <form class="darkFont" id="plants">
           <input type="checkbox" value="zucchini">Zucchini<br/>
           <input type="checkbox" value="carrots">Carrots<br/>
           <input type="checkbox" value="beets">Beets<br/>
-          <input type="checkbox" value="apples">Apples<br/>
+          <input type="checkbox" value="strawberries">Strawberries<br/>
           <input type="checkbox" value="corn">Corn<br/>
+          <input type="checkbox" value="daisy">Daisy<br/>
+          <input type="checkbox" value="iris">Iris<br/>
+          <input type="checkbox" value="peony">Peony<br/>
+          <input type="checkbox" value="sunflower">Sunflower<br/>
         </form> 
         <div id="noplants"></div>
 
         <h2>Select how many days you would like to simulate the growing of your plants (between 7 and 90 days):</h2>
-        <form class="mainFont">
+        <form class="darkFont">
           <input type="number" id="simulationdays" name="days" min="7" max="90">
         </form>
         <div id="nodays"></div>
+
         <button id="submit" type="reset">Submit</button>
         <input type=button value="Refresh" id="refresh">
 
-        <section id="result" class="mainFont">
-
+        <section id="result" class="darkFont">
+          <table>
+            <tr>
+              <td id="aliveTitle"></td>
+              <td id="alive"></td>
+            </tr>
+            <tr>
+              <td id="deadTitle"></td>
+              <td id="dead"></td>
+            </tr>
+          </table>
         </section>
+
       </section>
     </main>
 
