@@ -8,12 +8,12 @@ var buttonClick = document.getElementById("submit"),
     daysWarning = document.getElementById("nodays"),
     plantTypes = plantChoices.elements;
 
-var seattle   = new Region("seattle", 2,7,  1,5,  8,10),
-    sanfran   = new Region("sanfran", 2,6,  3,10, 4,7),
-    dallas    = new Region("dallas",  2,6,  1,10, 1,5),
-    chicago   = new Region("chicago", 1,7,  2,8,  5,8),
-    atlanta   = new Region("atlanta", 5,8,  2,8,  7,9),
-    boston    = new Region("boston",  4,7,  1,7,  2,9);
+var seattle   = new Region("seattle", 3,9,  2,6,  6,10),
+    sanfran   = new Region("sanfran", 2,7,  3,10, 2,7),
+    dallas    = new Region("dallas",  1,5,  8,10, 2,6),
+    chicago   = new Region("chicago", 2,6,  5,9,  3,8),
+    atlanta   = new Region("atlanta", 5,8,  7,10, 4,7),
+    boston    = new Region("boston",  4,10, 5,8,  5,9);
 
 var plants = new Garden();
 
@@ -47,19 +47,31 @@ function getPlants() {
   for (var i = 0; i < plantTypes.length; i++) {
     if (plantTypes[i].checked == true) {
       if (plantTypes[i].value == "zucchini") {
-        plants.addPlant("zucchini", 9, 6, 9, 20);
+        plants.addPlant("zucchini", 3, 2, 8, 50);
       }
       else if (plantTypes[i].value == "carrots") {
-        plants.addPlant("carrots", 8, 7, 5, 30);
+        plants.addPlant("carrots", 4, 3, 7, 30);
       }
       else if (plantTypes[i].value == "beets") {
-        plants.addPlant("beets", 7, 6, 8, 40);
+        plants.addPlant("beets", 7, 1, 5, 40);
       }
-      else if (plantTypes[i].value == "apples") {
-        plants.addPlant("apples", 7, 6, 8, 40);
+      else if (plantTypes[i].value == "strawberries") {
+        plants.addPlant("strawberries", 5, 7, 7, 40);
       }
       else if (plantTypes[i].value == "corn") {
-        plants.addPlant("corn", 7, 6, 8, 40);
+        plants.addPlant("corn", 3, 8, 2, 40);
+      }
+      else if (plantTypes[i].value == "daisy") {
+        plants.addPlant("daisy", 6, 5, 3, 40);
+      }
+      else if (plantTypes[i].value == "iris") {
+        plants.addPlant("iris", 5, 7, 4, 40);
+      }
+      else if (plantTypes[i].value == "peony") {
+        plants.addPlant("peony", 3, 7, 4, 40);
+      }
+      else if (plantTypes[i].value == "sunflower") {
+        plants.addPlant("sunflower", 3, 8, 6, 40);
       }
     }
   }
@@ -107,7 +119,7 @@ Garden.prototype.growPlants = function(region) {
   for(var day = 0; day < simulationDays.value; day++) {
     region.dailyValue();
     for(var i = 0; i < this.plants.length; i++) {
-      if ((this.plants[i].nutrients >= dailyNutrients) && (this.plants[i].sunlight >= dailySunlight) && (this.plants[i].water >= dailyWater)) {
+      if ((this.plants[i].nutrients <= dailyNutrients) && (this.plants[i].sunlight <= dailySunlight) && (this.plants[i].water <= dailyWater)) {
         this.plants[i].growingDays.push(1);
       }
       else {
@@ -132,23 +144,29 @@ function printResult(plantResults) {
       alive.push(plantResults[j].name);
     }
   }
-  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br> The " + dead + " have all died. <br> But the " + alive + " have all survived and grown into beautiful plants!";
+  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br>"
+  document.getElementById("alive").innerHTML = alive;
+  document.getElementById("dead").innerHTML = dead;
 }
 
 //check to see if user submitted values
 function checkPlants(event) {
-  if (plantTypes.length == 0) {
-    plantsWarning.innerHTML = "Please select at least one plant.";
-    event.preventDefault();
-  } else if (simulationdays.value == 0) {
+  console.log(plantTypes[0]);
+  if (simulationdays.value == 0) {
     daysWarning.innerHTML = "Please enter a number of days."
     event.preventDefault();
   }
   else {
-    displayContent();
+    for (var i = 0; i < plantTypes.length; i++) {
+      if (plantTypes[i].checked == true) {
+        displayContent;
+        break;
+      }
+    }
+  plantsWarning.innerHTML = "Please select at least one plant.";
+  event.preventDefault(); 
   }
 }
-
 
 buttonClick.addEventListener('click', checkPlants, false);
 refresh.addEventListener('click', function() {
