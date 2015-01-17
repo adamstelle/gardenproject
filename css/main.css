@@ -1,0 +1,124 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed|Old+Standard+TT);
+
+.background {
+  background-image: url(../images/background.png);
+  background-size: cover;
+}
+
+.body {
+  height: 600px;
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 25px;
+}
+
+.header {
+  height: 4em;
+  padding: .1em;
+  display: block;
+  position: relative;
+}
+
+.header::after {
+  content: "";
+  background-color: #fff;
+  opacity:.3;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: -1;
+
+}
+
+a:link {
+  color: #232b3d;
+  text-decoration: none;
+  font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.linkText {
+  font-size: 24px;
+  margin-left: 15px;
+}
+
+.icon {
+  height: 3.5em;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+li {
+  display: inline;
+}
+
+.footer {
+  text-align: center;
+  color: #232b3d;
+  font-family: 'Old Standard TT', serif;
+  display: block;
+  position: relative;
+}
+
+.footer::after {
+  content: "";
+  background-color: #fff;
+  opacity:.3;
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.actionButton {
+  background-color: #8f2541;
+  border: 2px solid #eef2ed;;
+  border-radius: 25px;
+  color: #eef2ed;
+  cursor: pointer;
+  display: inline-block;
+  padding: 20px 50px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #232b3d;
+}
+
+p, .mainFont {
+  font-family: 'Old Standard TT', serif;
+  font-size: 18px;
+  color: #eef2ed;
+  line-height: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+h2 {
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.darkFont {
+  font-family: 'Old Standard TT', serif;
+  font-size: 18px;
+  color: #232b3d;
+  line-height: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+
+
+
