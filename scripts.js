@@ -1,12 +1,12 @@
 var dailyNutrients, dailySunlight, dailyWater;
 
-var buttonClick = document.getElementById("submit"),
+var buttonClick     = document.getElementById("submit"),
     dropdownRegions = document.getElementById("regions"),
-    plantChoices = document.getElementById("plants"),
-    simulationDays = document.getElementById("simulationdays"),
-    plantsWarning = document.getElementById("noplants"),
-    daysWarning = document.getElementById("nodays"),
-    plantTypes = plantChoices.elements;
+    plantChoices    = document.getElementById("plants"),
+    simulationDays  = document.getElementById("simulationdays"),
+    plantsWarning   = document.getElementById("noplants"),
+    daysWarning     = document.getElementById("nodays"),
+    plantTypes      = plantChoices.elements;
 
 var seattle   = new Region("seattle", 3,9,  2,6,  6,10),
     sanfran   = new Region("sanfran", 2,7,  3,10, 2,7),
@@ -16,7 +16,6 @@ var seattle   = new Region("seattle", 3,9,  2,6,  6,10),
     boston    = new Region("boston",  4,10, 5,8,  5,9);
 
 var plants = new Garden();
-
 
 function displayContent() {
   simulationDays.value;
@@ -87,9 +86,8 @@ function Plant(name, nutrients, sunlight, water, ripeTime) {
   this.growingDays = growingDays;
   var dead = false
   this.dead = dead;
-}  
+}
 
-// Create environment object to store dailyValues, and call environment
 function Region(name, minNutrients, maxNutrients, minSunlight, maxSunlight, minWater, maxWater) {
   this.name = name;
   this.minNutrients = minNutrients;
@@ -131,7 +129,7 @@ Garden.prototype.growPlants = function(region) {
     };
   };
   printResult(this.plants);
-};
+}
 
 function printResult(plantResults) {
   var dead = [];
@@ -144,31 +142,36 @@ function printResult(plantResults) {
       alive.push(plantResults[j].name);
     }
   }
-  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br>"
-  document.getElementById("alive").innerHTML = alive;
-  document.getElementById("dead").innerHTML = dead;
+  document.getElementById("result").innerHTML += "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br>";
+  document.getElementById("resulttable").rows[0].cells[0].innerHTML += "Alive";
+  document.getElementById("resulttable").rows[0].cells[1].innerHTML += "Dead";
+  document.getElementById("resulttable").rows[1].cells[0].innerHTML += alive;
+  document.getElementById("resulttable").rows[1].cells[1].innerHTML += dead;
 }
 
-//check to see if user submitted values
-function checkPlants(event) {
-  console.log(plantTypes[0]);
-  if (simulationdays.value == 0) {
-    daysWarning.innerHTML = "Please enter a number of days."
+function validation(event) {
+  var checkedPlants = [];
+  if (simulationdays.value < 7) {
+    daysWarning.innerHTML = "Please enter a number of days between 7 and 90!"
     event.preventDefault();
   }
   else {
-    for (var i = 0; i < plantTypes.length; i++) {
-      if (plantTypes[i].checked == true) {
-        displayContent;
-        break;
+    for (var k = 0; k < plantTypes.length; k++) {
+      if (plantTypes[k].checked == true) {  
+        checkedPlants.push(1)
       }
     }
-  plantsWarning.innerHTML = "Please select at least one plant.";
-  event.preventDefault(); 
+    if (checkedPlants.length == 0) {
+      plantsWarning.innerHTML = "Please select at least one plant.";
+      event.preventDefault(); 
+    }
+    else{
+      displayContent();
+    }
   }
 }
 
-buttonClick.addEventListener('click', checkPlants, false);
+buttonClick.addEventListener('click', validation, false);
 refresh.addEventListener('click', function() {
  history.go();
 }, false);
