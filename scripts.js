@@ -128,6 +128,7 @@ Garden.prototype.growPlants = function(region) {
       };
     };
   };
+  printResult(this.plants);
 }
 
 function printResult(plantResults) {
@@ -141,30 +142,36 @@ function printResult(plantResults) {
       alive.push(plantResults[j].name);
     }
   }
-  document.getElementById("result").innerHTML = "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br>"
-  document.getElementById("alive").innerHTML = alive;
-  document.getElementById("dead").innerHTML = dead;
+  document.getElementById("result").innerHTML += "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br>";
+  document.getElementById("resulttable").rows[0].cells[0].innerHTML += "Alive";
+  document.getElementById("resulttable").rows[0].cells[1].innerHTML += "Dead";
+  document.getElementById("resulttable").rows[1].cells[0].innerHTML += alive;
+  document.getElementById("resulttable").rows[1].cells[1].innerHTML += dead;
 }
 
-function checkPlants(event) {
-  console.log(plantTypes[0]);
-  if (simulationdays.value == 0) {
-    daysWarning.innerHTML = "Please enter a number of days."
+function validation(event) {
+  var checkedPlants = [];
+  if (simulationdays.value < 7) {
+    daysWarning.innerHTML = "Please enter a number of days between 7 and 90!"
     event.preventDefault();
   }
   else {
-    for (var i = 0; i < plantTypes.length; i++) {
-      if (plantTypes[i].checked == true) {
-        displayContent;
-        break;
+    for (var k = 0; k < plantTypes.length; k++) {
+      if (plantTypes[k].checked == true) {  
+        checkedPlants.push(1)
       }
     }
-  plantsWarning.innerHTML = "Please select at least one plant.";
-  event.preventDefault(); 
+    if (checkedPlants.length == 0) {
+      plantsWarning.innerHTML = "Please select at least one plant.";
+      event.preventDefault(); 
+    }
+    else{
+      displayContent();
+    }
   }
 }
 
-buttonClick.addEventListener('click', checkPlants, false);
+buttonClick.addEventListener('click', validation, false);
 refresh.addEventListener('click', function() {
  history.go();
 }, false);
