@@ -2,76 +2,44 @@ var dailyNutrients, dailySunlight, dailyWater;
 
 var buttonClick     = document.getElementById("submit"),
     dropdownRegions = document.getElementById("regions"),
-    plantChoices    = document.getElementById("plants"),
     simulationDays  = document.getElementById("simulationdays"),
     plantsWarning   = document.getElementById("noplants"),
     daysWarning     = document.getElementById("nodays"),
+    plantChoices    = document.getElementById("plants"),
     plantTypes      = plantChoices.elements;
 
-var seattle   = new Region("seattle", 3,9,  2,6,  6,10),
-    sanfran   = new Region("sanfran", 2,7,  3,10, 2,7),
-    dallas    = new Region("dallas",  1,5,  8,10, 2,6),
-    chicago   = new Region("chicago", 2,6,  5,9,  3,8),
-    atlanta   = new Region("atlanta", 5,8,  7,10, 4,7),
-    boston    = new Region("boston",  4,10, 5,8,  5,9);
+var regions = {
+  "seattle" : new Region("seattle", 3,9,  2,6,  6,10),
+  "sanfran" : new Region("sanfran", 2,7,  3,10, 2,7),
+  "dallas" :  new Region("dallas",  1,5,  8,10, 2,6),
+  "chicago" : new Region("chicago", 2,6,  5,9,  3,8),
+  "atlanta" : new Region("atlanta", 5,8,  7,10, 4,7),
+  "boston" :  new Region("boston",  4,10, 5,8,  5,9),
+};
+
+var plantList = {
+  "zucchini"     : new Plant("zucchini",     2, 1, 5, 50),
+  "carrots"      : new Plant("carrots",      3, 2, 5, 30),
+  "beets"        : new Plant("beets",        7, 1, 5, 40),
+  "strawberries" : new Plant("strawberries", 5, 7, 7, 40),
+  "corn"         : new Plant("corn",         3, 8, 2, 40),
+  "daisy"        : new Plant("daisy",        6, 5, 3, 40),
+  "iris"         : new Plant("iris",         5, 7, 4, 40),
+  "peony"        : new Plant("peony",        3, 7, 4, 40),
+  "sunflower"    : new Plant("sunflower",     3, 8, 6, 40),
+};
 
 var plants = new Garden();
 
 function displayContent() {
-  simulationDays.value;
-  dropdownRegions.value;  
   getPlants();
-  switch(dropdownRegions.value){
-    case "seattle":
-      plants.growPlants(seattle);
-      break;
-    case "sanfran":
-      plants.growPlants(sanfran);
-      break;
-    case "dallas":
-      plants.growPlants(dallas);
-      break;
-    case "chicago":
-      plants.growPlants(chicago);
-      break;
-    case "atlanta":
-      plants.growPlants(atlanta);
-      break;
-    case "boston":
-      plants.growPlants(boston);
-  }
+  plants.growPlants(regions[dropdownRegions.value]);
 }
 
 function getPlants() {
   for (var i = 0; i < plantTypes.length; i++) {
     if (plantTypes[i].checked == true) {
-      if (plantTypes[i].value == "zucchini") {
-        plants.addPlant("zucchini", 3, 2, 8, 50);
-      }
-      else if (plantTypes[i].value == "carrots") {
-        plants.addPlant("carrots", 4, 3, 7, 30);
-      }
-      else if (plantTypes[i].value == "beets") {
-        plants.addPlant("beets", 7, 1, 5, 40);
-      }
-      else if (plantTypes[i].value == "strawberries") {
-        plants.addPlant("strawberries", 5, 7, 7, 40);
-      }
-      else if (plantTypes[i].value == "corn") {
-        plants.addPlant("corn", 3, 8, 2, 40);
-      }
-      else if (plantTypes[i].value == "daisy") {
-        plants.addPlant("daisy", 6, 5, 3, 40);
-      }
-      else if (plantTypes[i].value == "iris") {
-        plants.addPlant("iris", 5, 7, 4, 40);
-      }
-      else if (plantTypes[i].value == "peony") {
-        plants.addPlant("peony", 3, 7, 4, 40);
-      }
-      else if (plantTypes[i].value == "sunflower") {
-        plants.addPlant("sunflower", 3, 8, 6, 40);
-      }
+      plants.addPlant(plantList[plantTypes[i].value]);
     }
   }
 }
@@ -108,8 +76,8 @@ function Garden() {
   this.plants = [];
 }
 
-Garden.prototype.addPlant = function(name, nutrients, sunlight, water, ripeTime) {
-  this.plants.push(new Plant(name, nutrients, sunlight, water, ripeTime));    
+Garden.prototype.addPlant = function(plant) {
+  this.plants.push(plant);    
 }
 
 Garden.prototype.growPlants = function(region) {
@@ -132,23 +100,21 @@ Garden.prototype.growPlants = function(region) {
 }
 
 function printResult(plantResults) {
-  var dead = [];
-  var alive = [];
+  var resultTable = document.getElementById("resulttable")
+  resultTable.rows[0].cells[0].innerHTML += "Alive";
+  resultTable.rows[0].cells[1].innerHTML += "Dead";
   for (var j = 0; j < plantResults.length; j++) {
     if (plantResults[j].dead == true) {
-      dead.push(plantResults[j].name);
+      resultTable.rows[(j+1)].cells[1].innerHTML += plantResults[j].name;
     }
     else {
-      alive.push(plantResults[j].name);
+      resultTable.rows[(j+1)].cells[0].innerHTML += plantResults[j].name;
     }
   }
   document.getElementById("result").innerHTML += "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br>";
-  document.getElementById("resulttable").rows[0].cells[0].innerHTML += "Alive";
-  document.getElementById("resulttable").rows[0].cells[1].innerHTML += "Dead";
-  document.getElementById("resulttable").rows[1].cells[0].innerHTML += alive;
-  document.getElementById("resulttable").rows[1].cells[1].innerHTML += dead;
 }
 
+// Add valication to Plant object
 function validation(event) {
   var checkedPlants = [];
   if (simulationdays.value < 7) {

@@ -56,7 +56,6 @@ nav li {
   color: #232b3d;
   font-family: 'Old Standard TT', serif;
   display: block;
-  position: relative;
 }
 
 .footer::after {
@@ -65,7 +64,6 @@ nav li {
   opacity:.3;
   padding-top: 1.2em;
   padding-bottom: 1.2em;
-  position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
