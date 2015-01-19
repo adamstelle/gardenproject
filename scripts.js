@@ -18,15 +18,15 @@ var regions = {
 };
 
 var plantList = {
-  "zucchini"     : new Plant("zucchini",     2, 1, 5, 50),
-  "carrots"      : new Plant("carrots",      3, 2, 5, 30),
-  "beets"        : new Plant("beets",        7, 1, 5, 40),
-  "strawberries" : new Plant("strawberries", 5, 7, 7, 40),
-  "corn"         : new Plant("corn",         3, 8, 2, 40),
-  "daisy"        : new Plant("daisy",        6, 5, 3, 40),
-  "iris"         : new Plant("iris",         5, 7, 4, 40),
-  "peony"        : new Plant("peony",        3, 7, 4, 40),
-  "sunflower"    : new Plant("sunflower",     3, 8, 6, 40),
+  "Zucchini"     : new Plant("Zucchini",     2, 1, 5, 50),
+  "Carrots"      : new Plant("Carrots",      3, 2, 5, 30),
+  "Beets"        : new Plant("Beets",        7, 1, 5, 40),
+  "Strawberries" : new Plant("Strawberries", 5, 7, 7, 40),
+  "Corn"         : new Plant("Corn",         3, 8, 2, 40),
+  "Daisy"        : new Plant("Daisy",        6, 5, 3, 40),
+  "Iris"         : new Plant("Iris",         5, 7, 4, 40),
+  "Peony"        : new Plant("Peony",        3, 7, 4, 40),
+  "Sunflower"    : new Plant("Sunflower",     3, 8, 6, 40),
 };
 
 var plants = new Garden();
@@ -101,8 +101,8 @@ Garden.prototype.growPlants = function(region) {
 
 function printResult(plantResults) {
   var resultTable = document.getElementById("resulttable")
-  resultTable.rows[0].cells[0].innerHTML += "Alive";
-  resultTable.rows[0].cells[1].innerHTML += "Dead";
+  resultTable.rows[0].cells[0].innerHTML += "<h2>Alive</h2>";
+  resultTable.rows[0].cells[1].innerHTML += "<h2>Dead</h2>";
   for (var j = 0; j < plantResults.length; j++) {
     if (plantResults[j].dead == true) {
       resultTable.rows[(j+1)].cells[1].innerHTML += plantResults[j].name;
@@ -111,7 +111,7 @@ function printResult(plantResults) {
       resultTable.rows[(j+1)].cells[0].innerHTML += plantResults[j].name;
     }
   }
-  document.getElementById("result").innerHTML += "Thanks for simulating your garden! Over a period of " + simulationDays.value + " days, this how your garden has grown.<br>";
+  document.getElementById("result").innerHTML += "<h2>Thanks for simulating your garden!</h2> Over a period of " + simulationDays.value + " days, this how your garden has grown:<br><br>";
 }
 
 // Add valication to Plant object
