@@ -51,36 +51,39 @@ nav li {
   display: inline;
 }
 
-.footer {
+h3 {
   text-align: center;
   color: #232b3d;
   font-family: 'Old Standard TT', serif;
   display: block;
+  font-size: 14px;
 }
 
-.footer::after {
-  content: "";
-  background-color: #fff;
-  opacity:.3;
-  padding-top: 1.2em;
-  padding-bottom: 1.2em;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
+.top-margin {
+  margin-top: 35px;
 }
 
-.actionButton {
+.button {
   background-color: #8f2541;
-  border: 2px solid #eef2ed;;
-  border-radius: 25px;
+  border: 2px solid #eef2ed;
   color: #eef2ed;
   cursor: pointer;
   display: inline-block;
-  padding: 20px 50px;
   font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.mainbutton {
+  padding: 20px 50px;
   font-size: 16px;
   margin-top: 45px;
+  border-radius: 25px;
+}
+
+.smallbutton {
+  padding: 10px 30px;
+  font-size: 14px;
+  margin-top: 5px;
+  border-radius: 15px;
 }
 
 h1 {
@@ -129,3 +132,11 @@ h2 {
   margin-top: 25px;
 }
 
+td {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.input-box {
+  font-size: 14px;
+}
