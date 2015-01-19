@@ -3,16 +3,15 @@
    License: none (public domain)
 */
 
-html, body, div, span,
+html, body, div,
 h1, h2, h3, p, 
 a, 
-em, img,
-ol, ul, li,
-form, label, legend,
-table, tbody, tfoot, thead, tr, th, td,
+img,
+ul, li,
+table, tr, th, td,
 article,
 footer, header,
-menu, nav, section {
+nav, section {
   margin: 0;
   padding: 0;
   border: 0;
@@ -21,14 +20,14 @@ menu, nav, section {
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, 
-footer, header, hgroup, menu, nav, section {
+article, 
+footer, header, nav, section {
   display: block;
 }
 body {
   line-height: 1;
 }
-ol, ul {
+ul {
   list-style: none;
 }
 table {

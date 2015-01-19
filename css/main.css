@@ -7,8 +7,6 @@
 
 .body {
   height: 600px;
-  width: 50%;
-  margin: 0 auto;
   padding-top: 25px;
 }
 
@@ -50,7 +48,7 @@ a:link {
   margin-right: 10px;
 }
 
-li {
+nav li {
   display: inline;
 }
 
@@ -85,6 +83,7 @@ li {
   padding: 20px 50px;
   font-family: 'Ubuntu Condensed', sans-serif;
   font-size: 16px;
+  margin-top: 45px;
 }
 
 h1 {
@@ -95,10 +94,10 @@ h1 {
   color: #232b3d;
 }
 
-p, .mainFont {
+p {
   font-family: 'Old Standard TT', serif;
   font-size: 18px;
-  color: #eef2ed;
+  color: #232b3d;
   line-height: 20px;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -119,6 +118,17 @@ h2 {
   margin-top: 10px;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 25px;
+}
 
-
+.leftjustify {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 25px;
+}
 
