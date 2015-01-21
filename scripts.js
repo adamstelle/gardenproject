@@ -1,12 +1,4 @@
-var dailyNutrients, dailySunlight, dailyWater;
-
-var buttonClick     = document.getElementById("submit"),
-    dropdownRegions = document.getElementById("regions"),
-    simulationDays  = document.getElementById("simulationdays"),
-    plantsWarning   = document.getElementById("noplants"),
-    daysWarning     = document.getElementById("nodays"),
-    plantChoices    = document.getElementById("plants"),
-    plantTypes      = plantChoices.elements;
+var dailyNutrients, dailySunlight, dailyWater, $simulationDays, $plantTypes;
 
 var regions = {
   "seattle" : new Region("seattle", 3,9,  2,6,  6,10),
@@ -32,14 +24,16 @@ var plantList = {
 var plants = new Garden();
 
 function displayContent() {
+  var $dropdownRegions = $("#regions");
   getPlants();
-  plants.growPlants(regions[dropdownRegions.value]);
+  plants.growPlants(regions[$dropdownRegions[0].value]);
 }
 
 function getPlants() {
-  for (var i = 0; i < plantTypes.length; i++) {
-    if (plantTypes[i].checked == true) {
-      plants.addPlant(plantList[plantTypes[i].value]);
+  $plantTypes = $("input.checkbox");
+  for (var i = 0; i < ($plantTypes).length; i++) {
+    if ($plantTypes[i].checked == true) {
+      plants.addPlant(plantList[$plantTypes[i].value]);
     }
   }
 }
@@ -81,8 +75,9 @@ Garden.prototype.addPlant = function(plant) {
 }
 
 Garden.prototype.growPlants = function(region) {
+  $simulationDays = $("#simulationdays");
   this.region = region;
-  for(var day = 0; day < simulationDays.value; day++) {
+  for(var day = 0; day < $simulationDays[0].value; day++) {
     region.dailyValue();
     for(var i = 0; i < this.plants.length; i++) {
       if ((this.plants[i].nutrients <= dailyNutrients) && (this.plants[i].sunlight <= dailySunlight) && (this.plants[i].water <= dailyWater)) {
@@ -97,6 +92,7 @@ Garden.prototype.growPlants = function(region) {
     };
   };
   printResult(this.plants);
+  console.log(this.plants);
 }
 
 function printResult(plantResults) {
@@ -111,24 +107,27 @@ function printResult(plantResults) {
       resultTable.rows[(j+1)].cells[0].innerHTML += plantResults[j].name;
     }
   }
-  document.getElementById("result").innerHTML += "<h2>Thanks for simulating your garden!</h2> Over a period of " + simulationDays.value + " days, this how your garden has grown:<br><br>";
+  $("#result").append("<h2>Thanks for simulating your garden!</h2> Over a period of " + $simulationDays[0].value + " days, this how your garden has grown:<br><br>");
 }
 
-// Add valication to Plant object
+// Add validation to Plant object
 function validation(event) {
+  $simulationDays = $("#simulationdays");
+  $plantTypes = $("input.checkbox");
   var checkedPlants = [];
-  if (simulationdays.value < 7) {
-    daysWarning.innerHTML = "Please enter a number of days between 7 and 90!"
+  console.log($simulationDays[0].value);
+  if ($simulationDays[0].value < 7) {
+    $("#nodays").append("<h2>Please enter a number of days between 7 and 90!</h2>");
     event.preventDefault();
   }
   else {
-    for (var k = 0; k < plantTypes.length; k++) {
-      if (plantTypes[k].checked == true) {  
+    for (var k = 0; k < $plantTypes.length; k++) {
+      if ($plantTypes[k].checked == true) {  
         checkedPlants.push(1)
       }
     }
     if (checkedPlants.length == 0) {
-      plantsWarning.innerHTML = "Please select at least one plant.";
+      $("#noplants").append("<h2>Please select at least one plant.</h2>");
       event.preventDefault(); 
     }
     else{
@@ -137,7 +136,12 @@ function validation(event) {
   }
 }
 
-buttonClick.addEventListener('click', validation, false);
-refresh.addEventListener('click', function() {
- history.go();
-}, false);
+$(document).ready(function() {
+  $("#submit").click(function() {
+    validation('click');
+  });
+  $("#refresh").click(function() {
+    location.reload();
+  });
+});
+
