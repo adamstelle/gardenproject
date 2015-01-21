@@ -1,12 +1,4 @@
-var dailyNutrients, dailySunlight, dailyWater;
-
-var buttonClick     = document.getElementById("submit"),
-    dropdownRegions = document.getElementById("regions"),
-    simulationDays  = document.getElementById("simulationdays"),
-    plantsWarning   = document.getElementById("noplants"),
-    daysWarning     = document.getElementById("nodays"),
-    plantChoices    = document.getElementById("plants"),
-    plantTypes      = plantChoices.elements;
+var dailyNutrients, dailySunlight, dailyWater, plants, $plantTypes;
 
 var regions = {
   "seattle" : new Region("seattle", 3,9,  2,6,  6,10),
@@ -29,17 +21,17 @@ var plantList = {
   "Sunflower"    : new Plant("Sunflower",     3, 8, 6, 40),
 };
 
-var plants = new Garden();
-
 function displayContent() {
+  var $dropdownRegions = $("#regions");
   getPlants();
-  plants.growPlants(regions[dropdownRegions.value]);
+  plants.growPlants(regions[$dropdownRegions[0].value]);
 }
 
 function getPlants() {
-  for (var i = 0; i < plantTypes.length; i++) {
-    if (plantTypes[i].checked == true) {
-      plants.addPlant(plantList[plantTypes[i].value]);
+  $plantTypes = $("input.checkbox");
+  for (var i = 0; i < ($plantTypes).length; i++) {
+    if ($plantTypes[i].checked == true) {
+      plants.addPlant(plantList[$plantTypes[i].value]);
     }
   }
 }
@@ -72,8 +64,9 @@ Region.prototype.dailyValue = function() {
   dailyWater = Math.floor(Math.random() * (this.maxWater - this.minWater)) + this.minWater;
 }
 
-function Garden() {
+function Garden(simDays) {
   this.plants = [];
+  this.simDays = simDays; 
 }
 
 Garden.prototype.addPlant = function(plant) {
@@ -82,7 +75,7 @@ Garden.prototype.addPlant = function(plant) {
 
 Garden.prototype.growPlants = function(region) {
   this.region = region;
-  for(var day = 0; day < simulationDays.value; day++) {
+  for(var day = 0; day < this.simDays; day++) {
     region.dailyValue();
     for(var i = 0; i < this.plants.length; i++) {
       if ((this.plants[i].nutrients <= dailyNutrients) && (this.plants[i].sunlight <= dailySunlight) && (this.plants[i].water <= dailyWater)) {
@@ -97,47 +90,57 @@ Garden.prototype.growPlants = function(region) {
     };
   };
   printResult(this.plants);
+  console.log(this.plants);
 }
 
 function printResult(plantResults) {
-  var resultTable = document.getElementById("resulttable")
-  resultTable.rows[0].cells[0].innerHTML += "<h2>Alive</h2>";
-  resultTable.rows[0].cells[1].innerHTML += "<h2>Dead</h2>";
+  var resultTable = $("#resulttable");
+  var alive = [];
+  var dead = [];
+  resultTable.append("<tr><td><h2>Alive</h2></td><td><h2>Dead</h2></td></tr>")
   for (var j = 0; j < plantResults.length; j++) {
     if (plantResults[j].dead == true) {
-      resultTable.rows[(j+1)].cells[1].innerHTML += plantResults[j].name;
+      dead.push(plantResults[j].name);
     }
-    else {
-      resultTable.rows[(j+1)].cells[0].innerHTML += plantResults[j].name;
+    else {alive.push(plantResults[j].name);
     }
   }
-  document.getElementById("result").innerHTML += "<h2>Thanks for simulating your garden!</h2> Over a period of " + simulationDays.value + " days, this how your garden has grown:<br><br>";
+  for (var k = 0; k < Math.max([alive.length],[dead.length]); k++) {
+    resultTable.append("<tr><td>"+String(alive[k])+"</td><td>"+String(dead[k])+"</td></tr>");
+  }
+  $("#result").append("<h2>Thanks for simulating your garden!</h2> Over a period of " + plants.simDays + " days, this how your garden has grown:<br><br>");
 }
 
-// Add valication to Plant object
-function validation(event) {
+// Add validation to Plant object
+function validation() {
+  var $simulationDays = $("#simulationdays");
+  $plantTypes = $("input.checkbox");
   var checkedPlants = [];
-  if (simulationdays.value < 7) {
-    daysWarning.innerHTML = "Please enter a number of days between 7 and 90!"
-    event.preventDefault();
+  if ($simulationDays[0].value < 7) {
+    $("#nodays").append("<h2>Please enter a number of days between 7 and 90!</h2>");
   }
   else {
-    for (var k = 0; k < plantTypes.length; k++) {
-      if (plantTypes[k].checked == true) {  
+    for (var k = 0; k < $plantTypes.length; k++) {
+      if ($plantTypes[k].checked == true) {  
         checkedPlants.push(1)
       }
     }
     if (checkedPlants.length == 0) {
-      plantsWarning.innerHTML = "Please select at least one plant.";
-      event.preventDefault(); 
+      $("#noplants").append("<h2>Please select at least one plant.</h2>");
     }
     else{
+      plants = new Garden($simulationDays[0].value);
       displayContent();
     }
   }
 }
 
-buttonClick.addEventListener('click', validation, false);
-refresh.addEventListener('click', function() {
- history.go();
-}, false);
+$(document).ready(function() {
+  $("#submit").click(function() {
+    validation();
+  });
+  $("#refresh").click(function() {
+    location.reload();
+  });
+});
+

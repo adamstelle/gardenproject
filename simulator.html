@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/states.css">
     <link rel="stylesheet" href="css/unsemantic-grid-responsive.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
+    <script type="text/javascript" src="node_modules/chosen/main.js"></script>
+    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="jquery.validate.js"></script>
   </head>
   <body class="background grid-100">
     <header class="header">
@@ -36,15 +41,15 @@
         <h2>Please choose your plants:</h2>
         <ul>
           <form class="darkFont" id="plants">
-            <li><input type="checkbox" value="Zucchini">Zucchini</li>
-            <li><input type="checkbox" value="Carrots">Carrots</li>
-            <li><input type="checkbox" value="Beets">Beets</li>
-            <li><input type="checkbox" value="Strawberries">Strawberries</li>
-            <li><input type="checkbox" value="Corn">Corn</li>
-            <li><input type="checkbox" value="Daisy">Daisy</li>
-            <li><input type="checkbox" value="Iris">Iris</li>
-            <li><input type="checkbox" value="Peony">Peony</li>
-            <li><input type="checkbox" value="Sunflower">Sunflower</li>
+            <li><input class="checkbox" type="checkbox" value="Zucchini">Zucchini</li>
+            <li><input class="checkbox" type="checkbox" value="Carrots">Carrots</li>
+            <li><input class="checkbox" type="checkbox" value="Beets">Beets</li>
+            <li><input class="checkbox" type="checkbox" value="Strawberries">Strawberries</li>
+            <li><input class="checkbox" type="checkbox" value="Corn">Corn</li>
+            <li><input class="checkbox" type="checkbox" value="Daisy">Daisy</li>
+            <li><input class="checkbox" type="checkbox" value="Iris">Iris</li>
+            <li><input class="checkbox" type="checkbox" value="Peony">Peony</li>
+            <li><input class="checkbox" type="checkbox" value="Sunflower">Sunflower</li>
           </form> 
         </ul>
         <div id="noplants"></div>
@@ -56,52 +61,11 @@
         <button id="submit" class="button smallbutton" type="reset">Submit</button>
         <input type=button value="Refresh" class="button smallbutton" id="refresh">
       </section>
-      <section class="darkFont grid-40 mobile-grid-50">
+      <section id="outputs" class="darkFont grid-40 mobile-grid-50">
         <div id="result"></div>
         <table id="resulttable">
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
         </table>
       </section>
     </main>
-    <script type="text/javascript" src="scripts.js"></script>
   </body>
 </html>
