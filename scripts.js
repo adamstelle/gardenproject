@@ -1,4 +1,4 @@
-var dailyNutrients, dailySunlight, dailyWater, $simulationDays, $plantTypes;
+var dailyNutrients, dailySunlight, dailyWater, plants, $simulationDays, $plantTypes;
 
 var regions = {
   "seattle" : new Region("seattle", 3,9,  2,6,  6,10),
@@ -20,8 +20,6 @@ var plantList = {
   "Peony"        : new Plant("Peony",        3, 7, 4, 40),
   "Sunflower"    : new Plant("Sunflower",     3, 8, 6, 40),
 };
-
-var plants = new Garden();
 
 function displayContent() {
   var $dropdownRegions = $("#regions");
@@ -66,8 +64,9 @@ Region.prototype.dailyValue = function() {
   dailyWater = Math.floor(Math.random() * (this.maxWater - this.minWater)) + this.minWater;
 }
 
-function Garden() {
+function Garden(simDays) {
   this.plants = [];
+  this.simDays = simDays; 
 }
 
 Garden.prototype.addPlant = function(plant) {
@@ -75,9 +74,8 @@ Garden.prototype.addPlant = function(plant) {
 }
 
 Garden.prototype.growPlants = function(region) {
-  $simulationDays = $("#simulationdays");
   this.region = region;
-  for(var day = 0; day < $simulationDays[0].value; day++) {
+  for(var day = 0; day < this.simDays; day++) {
     region.dailyValue();
     for(var i = 0; i < this.plants.length; i++) {
       if ((this.plants[i].nutrients <= dailyNutrients) && (this.plants[i].sunlight <= dailySunlight) && (this.plants[i].water <= dailyWater)) {
@@ -107,15 +105,14 @@ function printResult(plantResults) {
       resultTable.rows[(j+1)].cells[0].innerHTML += plantResults[j].name;
     }
   }
-  $("#result").append("<h2>Thanks for simulating your garden!</h2> Over a period of " + $simulationDays[0].value + " days, this how your garden has grown:<br><br>");
+  $("#result").append("<h2>Thanks for simulating your garden!</h2> Over a period of " + plants.simDays + " days, this how your garden has grown:<br><br>");
 }
 
 // Add validation to Plant object
 function validation(event) {
-  $simulationDays = $("#simulationdays");
+  var $simulationDays = $("#simulationdays");
   $plantTypes = $("input.checkbox");
   var checkedPlants = [];
-  console.log($simulationDays[0].value);
   if ($simulationDays[0].value < 7) {
     $("#nodays").append("<h2>Please enter a number of days between 7 and 90!</h2>");
     event.preventDefault();
@@ -131,6 +128,7 @@ function validation(event) {
       event.preventDefault(); 
     }
     else{
+      plants = new Garden($simulationDays[0].value);
       displayContent();
     }
   }
