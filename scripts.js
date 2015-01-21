@@ -1,4 +1,4 @@
-var dailyNutrients, dailySunlight, dailyWater, plants, $simulationDays, $plantTypes;
+var dailyNutrients, dailySunlight, dailyWater, plants, $plantTypes;
 
 var regions = {
   "seattle" : new Region("seattle", 3,9,  2,6,  6,10),
@@ -94,28 +94,30 @@ Garden.prototype.growPlants = function(region) {
 }
 
 function printResult(plantResults) {
-  var resultTable = document.getElementById("resulttable")
-  resultTable.rows[0].cells[0].innerHTML += "<h2>Alive</h2>";
-  resultTable.rows[0].cells[1].innerHTML += "<h2>Dead</h2>";
+  var resultTable = $("#resulttable");
+  var alive = [];
+  var dead = [];
+  resultTable.append("<tr><td><h2>Alive</h2></td><td><h2>Dead</h2></td></tr>")
   for (var j = 0; j < plantResults.length; j++) {
     if (plantResults[j].dead == true) {
-      resultTable.rows[(j+1)].cells[1].innerHTML += plantResults[j].name;
+      dead.push(plantResults[j].name);
     }
-    else {
-      resultTable.rows[(j+1)].cells[0].innerHTML += plantResults[j].name;
+    else {alive.push(plantResults[j].name);
     }
+  }
+  for (var k = 0; k < Math.max([alive.length],[dead.length]); k++) {
+    resultTable.append("<tr><td>"+String(alive[k])+"</td><td>"+String(dead[k])+"</td></tr>");
   }
   $("#result").append("<h2>Thanks for simulating your garden!</h2> Over a period of " + plants.simDays + " days, this how your garden has grown:<br><br>");
 }
 
 // Add validation to Plant object
-function validation(event) {
+function validation() {
   var $simulationDays = $("#simulationdays");
   $plantTypes = $("input.checkbox");
   var checkedPlants = [];
   if ($simulationDays[0].value < 7) {
     $("#nodays").append("<h2>Please enter a number of days between 7 and 90!</h2>");
-    event.preventDefault();
   }
   else {
     for (var k = 0; k < $plantTypes.length; k++) {
@@ -125,7 +127,6 @@ function validation(event) {
     }
     if (checkedPlants.length == 0) {
       $("#noplants").append("<h2>Please select at least one plant.</h2>");
-      event.preventDefault(); 
     }
     else{
       plants = new Garden($simulationDays[0].value);
@@ -136,7 +137,7 @@ function validation(event) {
 
 $(document).ready(function() {
   $("#submit").click(function() {
-    validation('click');
+    validation();
   });
   $("#refresh").click(function() {
     location.reload();
